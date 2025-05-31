@@ -24,16 +24,18 @@
 
 Please follow the tutorial in `tutorials/O4a_GeV_excess_tutorial.ipynb`
 
---- 
+---
 
-## PBH asteroid-mass constraints: how to use your own mass functions or PBH formation model
+## Constraining PBH abundance with your own mass functions or formation models 
+
+### PBH asteroid-mass constraints:
 
 
 Please follow the tutorial in `tutorials/O4a_pbh_all_sky_tutorial.ipynb`
 
 ---
 
-## PBH planetary-mass constraints: how to use your own mass functions or PBH formation model
+### PBH planetary-mass constraints:
 
 
 Please follow the tutorial in `tutorials/O4a_light_pbh_tutorial.ipynb`
