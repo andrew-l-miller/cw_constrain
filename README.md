@@ -49,7 +49,10 @@ You can install the package directly from PyPI:
 
 ```bash
 pip install cw-constrain
-
-import cw_constrain
 ```
+
+And then in Python:
+
+`import cw_constrain`
+
 
