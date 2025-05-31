@@ -24,7 +24,7 @@
 
 Please follow the tutorial in `tutorials/O4a_GeV_excess_tutorial.ipynb`
 
----
+--- 
 
 ## PBH asteroid-mass constraints: how to use your own mass functions or PBH formation model
 
@@ -48,5 +48,6 @@ You can install the package directly from PyPI:
 ```bash
 pip install cw-constrain
 
-import cw_constrain``` (note the underescore versus hyphen)
+import cw_constrain
+```
 
