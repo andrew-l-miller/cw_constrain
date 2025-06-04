@@ -1,5 +1,9 @@
 import numpy as np
+import os
 from cw_constrain.PBH_constrain.pbh_constrain import pbh_get_constraints
+
+
+os.environ["CW_CONSTRAIN_LIMITS_PATH"] = "/Users/andrewmiller/Desktop/O4/limits/"
 
 def test_pbh_get_constraints_output_shapes_and_values():
     # Use a short list of chirp masses for a fast test

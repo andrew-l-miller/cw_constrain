@@ -1,8 +1,9 @@
 import numpy as np
-
+import os
 # Import your function (adjust the import path as needed)
 from cw_constrain.GeV_constrain.gev_constrain import GeV_excess_get_constraints
 
+os.environ["CW_CONSTRAIN_LIMITS_PATH"] = "/Users/andrewmiller/Desktop/O4/limits/"
 
 def test_GeV_excess_basic_run():
     # Run the function with default parameters
