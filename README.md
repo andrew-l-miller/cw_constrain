@@ -43,6 +43,10 @@ Please follow the tutorial in `tutorials/O4a_light_pbh_tutorial.ipynb`
 
 ---
 
+### Ultralight dark-matter constraints
+
+Please follow the tutorial in `tutorials/O4a_DM_interaction_tutorial.ipynb`
+
 
 ## Installation
 
@@ -130,4 +134,3 @@ Constraining planetary-mass PBH abundance:
     year = "2024"
 }
 ```
-
