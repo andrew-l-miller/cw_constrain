@@ -157,7 +157,7 @@ def tb_get_constraint_from_h0s(fs, h0s):
     ms = dm_calc_m(fs)  # result in eV
 
     # Eq. (2.4) from arXiv:2012.13997
-    alpha = np.sqrt(2) * ms * (Mplank * 1e9) / np.sqrt(rhodm_in_ev4) * ( h0s / np.sqrt(tens_avg))  # dimensionless
+    alpha = np.sqrt(2) * ms * (Mplank * 1e9 / np.sqrt(8*pi) / np.sqrt(rhodm_in_ev4) * ( h0s / np.sqrt(tens_avg))  # dimensionless
 
     return alpha
 
