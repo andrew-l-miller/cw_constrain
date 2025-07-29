@@ -116,7 +116,7 @@ def GeV_excess_get_constraints(
     
     Pgw = np.dot(ellip_sum, f_selected)
 
-    print('Pgw: ', Pgw)
+    # print('Pgw: ', Pgw)
     L0, sigmaL, Nmsp = load_luminosity_function(lum_func)
     Ngw = Pgw * Nmsp
 

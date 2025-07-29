@@ -28,6 +28,8 @@ def pbh_get_constraints(m1=2.5, run='O3', search='FH', lin_flag=1, Mcs=None):
     h0s_UL = h0s_UL[valid]
 
     fmin, fmax, fdotmin, fdotmax = get_cw_search_parms(run, search)
+    if run == 'O3' and search == 'FH':
+        fdotmax = np.abs(fdotmin)
     delta_f = fdotmax * Tobs
 
     interp_fs = np.arange(np.min(fs_UL), np.max(fs_UL), delta_f)
@@ -36,7 +38,6 @@ def pbh_get_constraints(m1=2.5, run='O3', search='FH', lin_flag=1, Mcs=None):
     h0s_UL = h0s_UL_interp
 
     tffts_interp = get_cw_search_TFFTs(run, search, fs_UL)
-
     rate_model_indep = np.zeros(len(Mcs))
     rate_model_indep_asymm = np.zeros(len(Mcs))
     ftilde_equal = np.zeros(len(Mcs))
@@ -53,7 +54,6 @@ def pbh_get_constraints(m1=2.5, run='O3', search='FH', lin_flag=1, Mcs=None):
         # Equal-mass case
         mtot_equal = 2 ** (6 / 5) * Mc
         fisco_equal = calc_f_isco(mtot_equal)
-
         linear_inds,_ = is_fevol_linear(Tobs, fs_UL, fdots, tffts_interp, n)
         if lin_flag == 0:
             linear_inds = np.ones_like(fs_UL, dtype=bool)

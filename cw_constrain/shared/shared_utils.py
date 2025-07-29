@@ -36,7 +36,6 @@ import numpy as np
 def load_cw_search_upper_limits(run, search):
     fs_UL = []
     h0s_UL = []
-
     data_path = os.environ.get("CW_CONSTRAIN_LIMITS_PATH")
     if data_path is None:
         raise RuntimeError("Please set the CW_CONSTRAIN_LIMITS_PATH environment variable.")
@@ -64,6 +63,13 @@ def load_cw_search_upper_limits(run, search):
                 A = [line.split() for line in fid]
                 fs_UL = [float(row[0]) for row in A]
                 h0s_UL = [float(row[1]) for row in A]
+        elif run == 'O4a':
+            fname = os.path.join(data_path, 'f_vs_h0min_o4a_FH.txt')
+            check_file_exists(fname)
+            with open(fname, 'r') as fid:
+                A = [line.split() for line in fid]
+                fs_UL = [float(row[0]) for row in A]
+                h0s_UL = [float(row[1]) for row in A]
 
     elif search == 'powerflux':
         if run == 'O3a':
@@ -83,9 +89,17 @@ def load_cw_search_upper_limits(run, search):
 
     elif search == 'SOAP':
         if run == 'O4a':
-            print('limits to come')
+            fname = os.path.join(data_path, 'o4a_limits_SOAP.txt')
+            check_file_exists(fname)
+            with open(fname, 'r') as fid:
+                A = [line.split() for line in fid if not line.strip().startswith('#')]
+                fs_UL = [float(row[0]) for row in A]
+                h0s_UL = [float(row[1]) for row in A]
 
-    return np.array(fs_UL), np.array(h0s_UL)
+    if run == 'O4a' and search == 'SOAP':
+        return np.array(fs_UL), 10**(np.array(h0s_UL))
+    else:
+        return np.array(fs_UL), np.array(h0s_UL)
 
 
 def get_cw_search_parms(run, search):
@@ -136,7 +150,7 @@ def get_cw_search_TFFTs(run, search, fs_UL):
             TFFTs[fs_UL > fmax_db3] = 1024
 
         elif run == 'O4a':
-            TFFTs = calc_TFFT_doppler(fs_UL)
+            TFFTs,_,_ = calc_TFFT_doppler(fs_UL)
 
     elif search == 'powerflux':
         fmax_db1 = 475
@@ -165,7 +179,7 @@ def calc_TFFT_doppler(f0):
     """
     consts = Constants()
     f0 = np.asarray(f0)
-    vorb = consts.vorb
+    vorb = consts.v_earth_orb
     c_val = const.c.value
     Rorb = consts.Rorb
 
@@ -178,7 +192,6 @@ def calc_TFFT_doppler(f0):
     deltaBeta = 1. / (ND * np.sin(beta_GC))
 
     deg_sq_area = np.abs(np.rad2deg(deltaLambda) * np.rad2deg(deltaBeta))
-
     return TFFT, deltaLambda, deltaBeta
 
 def calc_ND(f0, tfft):
@@ -193,7 +206,7 @@ def calc_ND(f0, tfft):
     - np.ndarray: Nd values
     """
     consts = Constants()
-    vorb = consts.vorb
+    vorb = consts.v_earth_orb
 
     v_over_c = vorb / const.c.value
     f0 = np.asarray(f0)

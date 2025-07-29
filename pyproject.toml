@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cw_constrain"
-version = "0.1.0"
+version = "0.1.3"
 license = "MIT AND (Apache-2.0 OR BSD-2-Clause)"
 authors = [
   { name="Andrew L. Miller", email="andrew.miller.ligo@gmail.com" },
@@ -31,6 +31,9 @@ Homepage = "https://github.com/andrew-l-miller/cw_constrain"
 Issues = "https://github.com/andrew-l-miller/cw_constrain/issues"
 Documentation = "https://github.com/andrew-l-miller/cw_constrain#readme"
 DOI = "https://doi.org/10.5281/zenodo.15559328"
+
+[tool.hatch.build.targets.wheel]
+packages = ["cw_constrain"]
 
 [tool.setuptools]
 include-package-data = true

@@ -39,3 +39,6 @@ def test_GeV_excess_with_plot_flag(monkeypatch):
     L0, sigmaL, Nmsp, Ngw, Pgw = GeV_excess_get_constraints(plot_flag=3)
     assert Pgw >= 0
 
+def test_GeV_excess_with_diff_lims():
+    L0, sigmaL, Nmsp, Ngw, Pgw = GeV_excess_get_constraints(run='O4a',search='FH')
+    assert Pgw >=0 
