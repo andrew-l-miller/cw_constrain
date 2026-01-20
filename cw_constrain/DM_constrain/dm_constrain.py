@@ -149,16 +149,28 @@ def tb_get_constraint_from_h0s(fs, h0s):
     alpha : np.ndarray
         Constraint on coupling alpha (dimensionless).
     """
-    tens_avg = 2/5 #arXiv:2012.13997
-    # Planck mass in GeV (natural units)
-    Mplank = 1.2209e19  # GeV
+    conversion = 1.9733e-16     # m = 1/GeV
+    # ev / m^3 --> ev^4
+    rhodm_in_ev_to_the_4 = rhodm * conversion**3 * (1e9)**3
 
-    # Compute boson mass from frequency
-    ms = dm_calc_m(fs)  # result in eV
+    # Planck mass
+    Mp = 1.2209e19              # GeV (natural units)
 
-    # Eq. (2.4) from arXiv:2012.13997
-    alpha = np.sqrt(2) * ms * (Mplank * 1e9 / np.sqrt(8*pi) / np.sqrt(rhodm_in_ev4) * ( h0s / np.sqrt(tens_avg))  # dimensionless
+    Mp_reduced = Mp / np.sqrt(8 * np.pi)
 
+    # boson mass in eV
+    ms = dm_calc_m(fs)          
+
+    # Eq. (2.4) of arXiv:2012.13997
+    alpha = (
+        np.sqrt(2)
+        * ms
+        * (Mp_reduced * 1e9)
+        / np.sqrt(rhodm_in_ev_to_the_4)
+        * h0s
+    )
+
+    alpha = alpha / 2
     return alpha
 
 

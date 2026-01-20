@@ -23,11 +23,20 @@ def GeV_excess_get_constraints(
     msp_min_fgw = 2 * msp_min_frot
 
 
-    this_dir = os.path.dirname(__file__)
-    data_path = os.path.join(this_dir, "data", "pulsar_data_atnf_f0_fdots_dist_Bfield_type_age.csv")
+    # this_dir = os.path.dirname(__file__)
+    # data_path = os.path.join(this_dir, "data", "pulsar_data_atnf_f0_fdots_dist_Bfield_type_age.csv")
+    # tbl = pd.read_csv(
+    # data_path,
+    # sep=';',
+    # skiprows=1,
+    # engine='python',
+    # na_values='*',  # <-- for pandas >= 1.3.0
+    # )
+    this_dir =  '/Users/andrewmiller/Desktop/O4/o4-gev-excess/'
+    data_path = os.path.join(this_dir, "data", "pulsars_filtered_clean.csv")
     tbl = pd.read_csv(
     data_path,
-    sep=';',
+    sep=',',
     skiprows=1,
     engine='python',
     na_values='*',  # <-- for pandas >= 1.3.0
@@ -42,7 +51,11 @@ def GeV_excess_get_constraints(
         fs_dist = np.array(pd.read_csv(data_input_freq+freq_dist,delim_whitespace=True, header=None)[0])
 
     inds = fs_dist >= msp_min_fgw
-    log_f_dist = np.log10(fs_dist[inds])
+    inds1 = tbl['(type)'].notna().values
+
+
+    log_f_dist = np.log10(fs_dist[inds & inds1])    
+    # log_f_dist = np.log10(fs_dist[inds])
 
 
 
