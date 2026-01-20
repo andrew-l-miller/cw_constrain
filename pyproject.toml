@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cw_constrain"
-version = "0.1.3"
+version = "0.1.4"
 license = "MIT AND (Apache-2.0 OR BSD-2-Clause)"
 authors = [
   { name="Andrew L. Miller", email="andrew.miller.ligo@gmail.com" },
